@@ -32,6 +32,12 @@ def show():
         gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         gray_img=cv2.cvtColor(gray_img, cv2.COLOR_GRAY2RGB)
         return gray_img
+    
+    def edged(img):
+        img = preprocess(img)
+        blurred = cv2.GaussianBlur(img, (5, 5), 0, 0)
+        edged = cv2.Canny(blurred, 100, 150)
+        return edged
         
     def annotated(img):
         img = preprocess(img)
@@ -50,7 +56,8 @@ def show():
         "HDR": hdr,
         "Sketch": sketch,
         "Grayscale": gray,
-        "annotated": annotated
+        "annotated": annotated,
+        "edged": edged
     }
     filters = st.selectbox("...and now, apply a filter!", filters_to_funcs.keys())
     
