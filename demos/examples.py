@@ -35,6 +35,9 @@ def show():
     
     def edged(img):
         img = preprocess(img)
+
+        img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
+
         blurred = cv2.GaussianBlur(img, (5, 5), 0, 0)
         edged = cv2.Canny(blurred, 100, 150)
         return edged
